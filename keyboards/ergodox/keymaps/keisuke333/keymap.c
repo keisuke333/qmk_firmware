@@ -20,8 +20,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |   =    |   1  |   2  |   3  |   4  |   5  |      |           |      |   6  |   7  |   8  |   9  |   0  |   -    |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * | Tab    |   Q  |   W  |   E  |   R  |   T  |      |           |CTLALT|   Y  |   U  |   I  |   O  |   P  |   \    |
- * |--------+------+------+------+------+------|      |           |  DEL |------+------+------+------+------+--------|
+ * | Tab    |   Q  |   W  |   E  |   R  |   T  |CTLALT|           |CTLALT|   Y  |   U  |   I  |   O  |   P  |   \    |
+ * |--------+------+------+------+------+------|  DEL |           |  DEL |------+------+------+------+------+--------|
  * | LCTRL  |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  |   '    |
  * |--------+------+------+------+------+------| Hyper|           |      |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
@@ -32,7 +32,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        | App  |      |       |      |      |
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      |      |       |      |        |      |
- *                                 | Space|Backsp|------|       |------|  Tab   |Enter |
+ *                                 | Space|Backsp|------|       |------|        |Enter |
  *                                 |      |ace   | Esc  |       | Esc  |        |      |
  *                                 `--------------------'       `----------------------'
  */
@@ -41,7 +41,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
         KC_EQL,  KC_1,   KC_2,   KC_3,   KC_4,   KC_5,    KC_NO,
-        KC_TAB,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,    KC_NO,
+        KC_TAB,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,    LALT(LCTL(KC_DEL)),
         KC_LCTRL,KC_A,   KC_S,   KC_D,   KC_F,   KC_G,
         KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,    ALL_T(KC_NO),
         MO(MDIA),KC_NO,  KC_LALT,KC_LGUI,KC_LANG2,
@@ -56,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                            KC_LANG1,KC_RALT,KC_LBRC,KC_RBRC,KC_FN1,
         KC_NO, KC_NO,
         KC_NO,
-        KC_ESC,KC_TAB, KC_ENT
+        KC_ESC,KC_NO, KC_ENT
     ),
 /* Keymap 1: Symbol Layer
  *
