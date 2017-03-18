@@ -7,6 +7,11 @@
 #define SYMB 1 // symbols
 #define MDIA 2 // media keys
 
+#define MOD_LCTL 0x1
+#define MOD_LGUI 0x2
+#define MOD_LSFT 0x4
+#define MOD_LALT 0x8
+
 enum custom_keycodes {
   PLACEHOLDER = SAFE_RANGE, // can always be here
   EPRM,
@@ -165,6 +170,15 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     return MACRO_NONE;
 };
 
+static uint16_t mod_state = 0;
+const uint16_t key_combo[][3] = {
+//{mod_combo, remap_src, remap_dest}
+  {(MOD_LCTL|MOD_LGUI), KC_H, KC_LEFT},
+  {(MOD_LCTL|MOD_LGUI), KC_J, KC_DOWN},
+  {(MOD_LCTL|MOD_LGUI), KC_K, KC_UP},
+  {(MOD_LCTL|MOD_LGUI), KC_L, KC_RGHT}
+};
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     // dynamically generate these.
@@ -189,6 +203,53 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
       break;
   }
+
+  if (keycode == KC_LCTL) {
+    if (record->event.pressed) {
+      mod_state |= MOD_LCTL;
+    } else {
+      mod_state &= ~(MOD_LCTL);
+    }
+  }
+
+  if (keycode == KC_LGUI) {
+    if (record->event.pressed) {
+      mod_state |= MOD_LGUI;
+    } else {
+      mod_state &= ~(MOD_LGUI);
+    }
+  }
+
+  if (keycode == KC_LSFT) {
+    if (record->event.pressed) {
+      mod_state |= MOD_LSFT;
+    } else {
+      mod_state &= ~(MOD_LSFT);
+    }
+  }
+
+  if (keycode == KC_LALT) {
+    if (record->event.pressed) {
+      mod_state |= MOD_LALT;
+    } else {
+      mod_state &= ~(MOD_LALT);
+    }
+  }
+
+  for(int i = 0; i < sizeof(key_combo) / sizeof(key_combo[0]); i++) {
+    if (mod_state == key_combo[i][0]) {
+      if(keycode == key_combo[i][1]) {
+        if (record->event.pressed) {
+          clear_mods();
+          register_code(key_combo[i][2]);
+        } else {
+          unregister_code(key_combo[i][2]);
+        }
+        return false;
+      }
+    }
+  }
+
   return true;
 }
 
@@ -196,7 +257,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 void matrix_init_user(void) {
 
 };
-
 
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void) {
