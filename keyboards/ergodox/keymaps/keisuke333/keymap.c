@@ -12,6 +12,8 @@
 #define MOD_LSFT 0x4
 #define MOD_LALT 0x8
 
+void update_mod_state(uint16_t, keyrecord_t *);
+
 enum custom_keycodes {
   PLACEHOLDER = SAFE_RANGE, // can always be here
   EPRM,
@@ -171,6 +173,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 };
 
 static uint16_t mod_state = 0;
+
 const uint16_t key_combo[][3] = {
 //{mod_combo, remap_src, remap_dest}
   {(MOD_LCTL|MOD_LGUI), KC_H, KC_LEFT},
@@ -179,31 +182,7 @@ const uint16_t key_combo[][3] = {
   {(MOD_LCTL|MOD_LGUI), KC_L, KC_RGHT}
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    // dynamically generate these.
-    case EPRM:
-      if (record->event.pressed) {
-        eeconfig_init();
-      }
-      return false;
-      break;
-    case VRSN:
-      if (record->event.pressed) {
-        SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
-      }
-      return false;
-      break;
-    case RGB_SLD:
-      if (record->event.pressed) {
-        #ifdef RGBLIGHT_ENABLE
-          rgblight_mode(1);
-        #endif
-      }
-      return false;
-      break;
-  }
-
+void update_mod_state(uint16_t keycode, keyrecord_t *record) {
   if (keycode == KC_LCTL) {
     if (record->event.pressed) {
       mod_state |= MOD_LCTL;
@@ -235,6 +214,34 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       mod_state &= ~(MOD_LALT);
     }
   }
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    // dynamically generate these.
+    case EPRM:
+      if (record->event.pressed) {
+        eeconfig_init();
+      }
+      return false;
+      break;
+    case VRSN:
+      if (record->event.pressed) {
+        SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
+      }
+      return false;
+      break;
+    case RGB_SLD:
+      if (record->event.pressed) {
+        #ifdef RGBLIGHT_ENABLE
+          rgblight_mode(1);
+        #endif
+      }
+      return false;
+      break;
+  }
+
+  update_mod_state(keycode, record);
 
   for(int i = 0; i < sizeof(key_combo) / sizeof(key_combo[0]); i++) {
     if (mod_state == key_combo[i][0]) {
@@ -253,10 +260,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
+
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void) {
 
 };
+
 
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void) {
