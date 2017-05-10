@@ -6,7 +6,7 @@
 #define BASE 0 // default layer
 #define SYMB 1 // symbols
 #define MDIA 2 // media keys
-#define CURS 3 // cursor keys
+#define CURS 3 // cursor keys and symbols
 
 #define _______ KC_TRNS
 
@@ -29,14 +29,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   | +L2  | Alt  | Alt  | LGui |LANG2*|                                       |LANG1 | Alt  |      |      | ~L1  |
+ *   | +L2  | Alt  | Alt  | LGui |LANG2+|                                       |LANG1 | Alt  |      |      | ~L1  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |Delete| Home |       |Break |Insert|
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      | End  |       |      |        |      |
  *                                 | Space|Back  |------|       |------|        |Enter |
- *                                 |      |space |Esc+L1|       | Esc  |        |      |
+ *                                 |      |space | Esc  |       | Esc  |        |      |
  *                                 `--------------------'       `----------------------'
  */
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
@@ -50,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         MO(MDIA), KC_LALT, KC_LALT, KC_LGUI, LT(CURS, KC_LANG2),
                                                                KC_DEL, KC_HOME,
                                                                         KC_END,
-                                             KC_SPC, KC_BSPC, LT(SYMB, KC_ESC),
+                                                      KC_SPC, KC_BSPC,  KC_ESC,
         // right hand
         LALT(LCTL(KC_DEL)), KC_6,     KC_7,    KC_8,    KC_9,   KC_0,    KC_MINS,
         KC_NO,              KC_Y,     KC_U,    KC_I,    KC_O,   KC_P,    KC_BSLS,
@@ -167,10 +167,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 // CURSOR
 [CURS] = KEYMAP(
+    // left hand
        _______, _______, _______, _______, _______, _______, _______,
-       _______, _______, _______, _______, _______, _______, _______,
-       _______, _______, _______, _______, _______, _______,
-       _______, _______, _______, _______, _______, _______, _______,
+       _______, KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE, _______,
+       _______, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,
+       _______, KC_PERC, KC_CIRC, KC_LBRC, KC_RBRC, KC_TILD, _______,
        _______, _______, _______, _______, _______,
                                            _______, _______,
                                                     _______,
