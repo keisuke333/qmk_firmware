@@ -28,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   | +L2  | Alt  | LGui | Alt  |LANG2+|                                       |LANG1 | Alt  |      |      | ~L1  |
+ *   | +L2  | Alt  | LGui | Alt  |LANG2+|                                       |LANG1 | Alt  |RCTRL |RCTRL | ~L1  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |Delete| Home |       |Break |Insert|
@@ -51,11 +51,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                         KC_END,
                                                       KC_SPC, KC_BSPC,  KC_ESC,
         // right hand
-        LALT(LCTL(KC_DEL)), KC_6,     KC_7,    KC_8,    KC_9,   KC_0,    KC_MINS,
-        KC_F11,             KC_Y,     KC_U,    KC_I,    KC_O,   KC_P,    KC_BSLS,
-                            KC_H,     KC_J,    KC_K,    KC_L,   KC_SCLN, KC_QUOT,
-        KC_NO,              KC_N,     KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
-                            KC_LANG1, KC_RALT, KC_NO,   KC_NO,  KC_FN1,
+        LALT(LCTL(KC_DEL)), KC_6,     KC_7,    KC_8,     KC_9,     KC_0,    KC_MINS,
+        KC_F11,             KC_Y,     KC_U,    KC_I,     KC_O,     KC_P,    KC_BSLS,
+                            KC_H,     KC_J,    KC_K,     KC_L,     KC_SCLN, KC_QUOT,
+        KC_NO,              KC_N,     KC_M,    KC_COMM,  KC_DOT,   KC_SLSH, KC_RSFT,
+                            KC_LANG1, KC_RALT, KC_RCTRL, KC_RCTRL, KC_FN1,
         KC_BRK, KC_INS,
         KC_NO,
         KC_ESC, KC_NO, KC_ENT
