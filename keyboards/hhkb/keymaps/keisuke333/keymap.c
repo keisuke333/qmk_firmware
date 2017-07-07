@@ -1,7 +1,3 @@
-/* 
- * HHKB Layout by keisuke333 
- */
-
 #include "hhkb.h"
 
 #define BASE 0
