@@ -168,6 +168,8 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 };
 
 
+uint32_t tmp_layer_state = 0;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     // dynamically generate these.
@@ -183,6 +185,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+
+    // for switch IME
+    case KC_LANG1:
+      if (!record->event.pressed) {
+        register_code(KC_F15);
+        unregister_code(KC_F15);
+      }
+      break;
+    case LT(SYMB, KC_LANG2):
+      if (record->event.pressed) {
+        tmp_layer_state = layer_state;
+      } else {
+        if (tmp_layer_state == layer_state){
+          register_code(KC_F16);
+          unregister_code(KC_F16);
+	}
+      }
+    break;
   }
   return true;
 }
