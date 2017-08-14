@@ -26,7 +26,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------| F10  |           | F11  |------+------+------+------+------+--------|
  * | LCTRL  |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  |   '    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
+ * | LShift |   Z  |   X  |   C  |   V  |   B  | BASE |           | SYMB |   N  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   | +L2  | Alt  | LGui | Alt  |LANG2+|                                       |LANG1 | Alt  |RCTRL |RCTRL | ~L1  |
  *   `----------------------------------'                                       `----------------------------------'
@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_EQL,   KC_1,    KC_2,    KC_3,    KC_4,               KC_5, LALT(LCTL(KC_BRK)),
         KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,               KC_T, KC_F10,
         KC_LCTRL, KC_A,    KC_S,    KC_D,    KC_F,               KC_G,
-        KC_LSFT,  KC_Z,    KC_X,    KC_C,    KC_V,               KC_B, KC_NO,
+        KC_LSFT,  KC_Z,    KC_X,    KC_C,    KC_V,               KC_B, TO(BASE),
         MO(MDIA), KC_LALT, KC_LGUI, KC_LALT, LT(SYMB, KC_LANG2),
                                                                KC_DEL, KC_HOME,
                                                                         KC_END,
@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LALT(LCTL(KC_DEL)), KC_6,     KC_7,    KC_8,     KC_9,     KC_0,    KC_MINS,
         KC_F11,             KC_Y,     KC_U,    KC_I,     KC_O,     KC_P,    KC_BSLS,
                             KC_H,     KC_J,    KC_K,     KC_L,     KC_SCLN, KC_QUOT,
-        KC_NO,              KC_N,     KC_M,    KC_COMM,  KC_DOT,   KC_SLSH, KC_RSFT,
+        TO(SYMB),           KC_N,     KC_M,    KC_COMM,  KC_DOT,   KC_SLSH, KC_RSFT,
                             KC_LANG1, KC_RALT, KC_RCTRL, KC_RCTRL, KC_FN1,
         KC_BRK, KC_INS,
         KC_NO,
